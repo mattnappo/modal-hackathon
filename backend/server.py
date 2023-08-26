@@ -13,8 +13,9 @@ def transcribe_url(url: str):
 
 @app.get("/marketSearch")
 def search_topic(prompt: str):
-    run = modal.Function.lookup("market-research", "run")
-    return json.dumps(run.remote(prompt))
+    #run = modal.Function.lookup("market-research", "run")
+    #return json.dumps(run.remote(prompt))
+    return {'text': "hi there"}
 
 if __name__ == "__main__":
     uvicorn.run("server:app", port=5000, log_level="info")
