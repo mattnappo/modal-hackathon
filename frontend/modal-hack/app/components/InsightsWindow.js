@@ -30,13 +30,19 @@ export const getServerSideProps = async (request) => {
 }
 */
 
-function InsightsWindow({data}) {
+function InsightsWindow() {
 
   // const searchParams = useSearchParams()
   // const url = searchParams.get('url')
 
   // console.log("got data props", props.data)
+
+
+
+  const data =fetch(`http://localhost:3000/api/insights?url=hi`).then(e => console.log(e).then(e => console.log(e)));
+
   console.log("got data props", data)
+
 
   return (
     <div>
