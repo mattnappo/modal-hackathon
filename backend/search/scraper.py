@@ -157,6 +157,8 @@ async def run(prompt):
     for i in range(len(temp1)):
         summary = all_summaries[i]
         title = temp2[i]
+        if temp1[i] == None:
+            temp1[i] = ""
         summaries.get(title)['link'] = temp1[i]
         summaries.get(title)['summary'] = summary
     return summaries
