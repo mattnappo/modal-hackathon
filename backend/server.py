@@ -1,32 +1,20 @@
 from typing import Union
 
 from fastapi import FastAPI
+import json
 import uvicorn
-
+from insights.transcript import transcribe_video
+import modal
 app = FastAPI()
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-@app.get("/insights")
-def get_insights(url: str):
-    res = {
-        'title': 'some video title',
-        'url': url,
-        'text': ['str1', 'str2', 'str3']
-    }
-
-    return res
+@app.get("/insights/")
+def transcribe_url(url: str):
+    return json.dumps(transcribe_video(url))
 
 @app.get("/marketSearch")
-def get_marketsearch(prompt: str):
-    res = {
-        'prompt': prompt,
-        'bulletPoints': ['the market is good', 'the market is amazing'],
-    }
-
-    return res
+def search_topic(prompt: str):
+    run = modal.Function.lookup("market-research", "run")
+    return json.dumps(run.remote(prompt))
 
 if __name__ == "__main__":
     uvicorn.run("server:app", port=5000, log_level="info")
