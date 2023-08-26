@@ -1,11 +1,7 @@
 'use client'
-import Image from 'next/image'
-import HighlightWindow from './components/HighlightWindow'
-import Album from './components/LandingPage'
-import GlobalStyles from '@mui/material/GlobalStyles';
 import LandingPage from './components/LandingPage';
 
-export default function Home() {
+export default function Page() {
   /*
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">

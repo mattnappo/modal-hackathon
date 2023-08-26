@@ -15,22 +15,32 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
+import { useRouter } from 'next/navigation'
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function LandingPage() {
   // State to hold the text input value
-  const [inputValue, setInputValue] = React.useState('');
+  const [promptValue, setPromptValue] = React.useState('');
+  const [urlValue, setUrlValue] = React.useState('');
 
-  // Function to handle text input changes
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
+  const router = useRouter();
+
+  const handleUrlChange = (event) => {
+    setUrlValue(event.target.value);
   };
 
-  // Function to handle button click
-  const handleButtonClick = () => {
-    // Do something with inputValue, e.g., submit it or perform an action
-    console.log('Input Value:', inputValue);
+  const handlePromptChange = (event) => {
+    setPromptValue(event.target.value);
+  };
+
+  const gotoInsights = () => {
+    console.log('url Value:', urlValue);
+    router.push('/insights');
+  };
+  
+  const gotoSearch = () => {
+    console.log('prompt value:', promptValue);
   };
 
   return (
@@ -78,8 +88,8 @@ export default function LandingPage() {
                 justifyContent="center"
                 style={{marginBottom: 15}}
               >
-                <Input placeholder="Enter YouTube link" onChange={handleInputChange} />
-                <Button variant="outlined" onClick={handleButtonClick} >Run</Button>
+                <Input placeholder="Enter YouTube link" onChange={handleUrlChange} />
+                <Button variant="outlined" onClick={gotoInsights} >Run</Button>
               </Stack>
             </Card>
 
@@ -99,9 +109,9 @@ export default function LandingPage() {
                 style={{marginBottom: 15}}
               >
 
-                <Input placeholder="Enter a prompt" onChange={handleInputChange} />
+                <Input placeholder="Enter a prompt" onChange={handlePromptChange} />
 
-                <Button variant="outlined" onClick={handleButtonClick} >Search</Button>
+                <Button variant="outlined" onClick={gotoSearch} >Search</Button>
 
               </Stack>
             </Card>
