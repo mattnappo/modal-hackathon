@@ -1,5 +1,6 @@
+'use client'
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Input from '@mui/material/Input';
 import Card from '@mui/material/Card';
@@ -16,33 +17,25 @@ import Link from '@mui/material/Link';
 import { useRouter } from 'next/navigation'
 import ClickableTextBox from './ClickableTextBox';
 import NavBar from './NavBar';
-// import { useSearchParams } from 'next/navigation'
-
-/*
-export const getServerSideProps = async (request) => {
-  const url = request.nextUrl.searchParams.get('url');
-  console.log('url:', url)
-
-  const res = await fetch('https://api.github.com/repos/vercel/next.js')
-  const data = await res.json()
-
-  return { props: { data } }
-}
-*/
+import { useSearchParams } from 'next/navigation'
 
 function InsightsWindow() {
 
-  // const searchParams = useSearchParams()
-  // const url = searchParams.get('url')
+  const [data, setData] = useState(null)
+  const [isLoading, setLoading] = useState(true)
 
-  // console.log("got data props", props.data)
+  const searchParams = useSearchParams()
 
+  useEffect(() => {
+    const url = searchParams.get('url')
 
-
-  const data =fetch(`http://localhost:3000/api/insights?url=hi`).then(e => console.log(e).then(e => console.log(e)));
-
-  console.log("got data props", data)
-
+    fetch(`/api/insights?url=${url}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data)
+        setLoading(false)
+      })
+  }, [])
 
   return (
     <div>
@@ -71,8 +64,8 @@ function InsightsWindow() {
 
             <Card className="featureCard">
 
-              {/* URL: {url} */}
-              {/* proc: {props.data} */}
+              {JSON.stringify(data)}
+
               <ClickableTextBox className="textBox" />
 
             </Card>
