@@ -1,8 +1,15 @@
 'use client'
-import HighlightWindow from '../components/HighlightWindow';
+import InsightsWindow from '../components/InsightsWindow';
 
-export default function Insights() {
+export const getServerSideProps = async () => {
+  console.log("BEING CALLED");
+  const res = await fetch('https://api.github.com/repos/vercel/next.js')
+  const repo = await res.json()
+  return { props: { repo } }
+}
+
+export default function Insights({data}) {
   return (
-    <HighlightWindow />
+    <InsightsWindow data={data} />
   );
 }

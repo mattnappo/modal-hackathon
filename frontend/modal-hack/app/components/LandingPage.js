@@ -16,6 +16,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { useRouter } from 'next/navigation'
+import NavBar from './NavBar';
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -36,25 +37,18 @@ export default function LandingPage() {
 
   const gotoInsights = () => {
     console.log('url Value:', urlValue);
-    router.push('/insights');
+    router.push(`/insights?url=${urlValue}`);
   };
   
   const gotoSearch = () => {
     console.log('prompt value:', promptValue);
+    router.push(`/marketSearch?prompt=${promptValue}`);
   };
 
   return (
       <div>
-      <AppBar position="relative">
-        <Toolbar>
-          <QueryStatsIcon sx={{ mr: 2 }} />
-          <Typography variant="h6" color="inherit" noWrap>
-            MarketSpeak
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <NavBar />
       <main>
-        {/* Hero unit */}
         <Box
           sx={{
             bgcolor: 'background.paper',

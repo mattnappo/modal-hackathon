@@ -42,3 +42,7 @@ body {
 .featureCard {
   outline: 2px solid #03a9f4;
 }
+
+.textBox {
+  padding: 25px;
+}

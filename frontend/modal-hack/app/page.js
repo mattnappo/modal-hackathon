@@ -115,6 +115,6 @@ export default function Page() {
   */
 
   return (
-      <LandingPage />
+    <LandingPage />
   )
 }
