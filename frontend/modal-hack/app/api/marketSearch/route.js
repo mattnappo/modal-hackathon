@@ -8,5 +8,6 @@ export async function GET(request) {
   console.log(res)
 
   const data = await res.json();
+  console.log("DATA",data)
   return NextResponse.json({ data })
 }

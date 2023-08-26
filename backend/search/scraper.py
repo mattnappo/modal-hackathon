@@ -10,10 +10,12 @@ import ast
 research_image = modal.Image.debian_slim(
     python_version="3.10"
 ).pip_install("aiohttp", "openai", "bs4")
-stub = modal.Stub("market-research", image=research_image)
+stub = modal.Stub("market-research", image=research_image, secrets=[modal.Secret.from_name("my-custom-secret")])
 # Set up OpenAI key
-openai.api_key = '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'
-NEWSAPI_KEY = 'b827d19b6506423880c2b8bbe9b107fd'
+# openai.api_key = os.getenv("OpenAI_API_Key")
+# NEWSAPI_KEY = os.getenv("News_API_Key")
+# print(openai.api_key)
+# print(NEWSAPI_KEY)
 
 slack_sdk_image = modal.Image.debian_slim().pip_install("slack-sdk","aiohttp", "openai", "bs4")
 @stub.function()
@@ -22,6 +24,7 @@ async def scrape_and_summarize(url) -> str:
     Scrapes the content of the article from the given URL, cleans the content, 
     and then uses OpenAI's API to summarize the article.
     """
+    openai.api_key = os.environ["OpenAI_API_Key"]
     if url == None or url == "None":
         return ""
     print(f"Scraping and summarizing {url[:50]}...")
@@ -58,12 +61,10 @@ async def scrape_and_summarize(url) -> str:
 
 @stub.function()
 async def fetch_research_data(prompt: str) -> dict:
+    print(list(os.environ.keys()))
+    openai.api_key = os.environ["OpenAI_API_Key"]
+    NEWSAPI_KEY = os.environ["News_API_Key"]
     # Summarize the prompt
-    # summarized_query = openai.Completion.create(
-    #     engine="text-davinci-003",
-    #     prompt=f"Summarize the following text for a search query for Google: \"{prompt}\"",
-    #     max_tokens=50
-    # ).choices[0].text.strip()
     print(prompt)
     
     BASE_URL_HN = f"https://hn.algolia.com/api/v1/search_by_date?query={prompt}"
