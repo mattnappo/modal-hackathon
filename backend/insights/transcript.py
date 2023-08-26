@@ -5,7 +5,7 @@ Super inefficent rn...
 
 import whisper
 from pytube import YouTube
-from youtubesearchpython import VideosSearch
+# from youtubesearchpython import VideosSearch
 # import json
 
 from tqdm import tqdm, trange
