@@ -1,6 +1,8 @@
 
-export default function ClickableTextBox() {
+export default function ClickableTextBox({ data }) {
   return (
-    <div className="textBox">hi</div>
+    <div className="textBox">
+      {JSON.stringify(data)}
+    </div>
   );
 }

@@ -1,5 +1,6 @@
+'use client'
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Input from '@mui/material/Input';
 import Card from '@mui/material/Card';
@@ -20,9 +21,22 @@ import { useSearchParams } from 'next/navigation'
 
 function MarketSearch() {
 
+  const [data, setData] = useState(null)
+  const [isLoading, setLoading] = useState(true)
+
   const searchParams = useSearchParams()
 
-  const prompt = searchParams.get('prompt')
+  useEffect(() => {
+    const prompt = searchParams.get('prompt')
+
+    fetch(`/api/marketSearch?prompt=${prompt}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data)
+        setLoading(false)
+      })
+  }, [])
+
 
   return (
     <div>
@@ -52,7 +66,7 @@ function MarketSearch() {
             <Card className="featureCard">
 
               <Typography className="textBox">
-                Market search w prompt: {prompt}
+                { isLoading ? "Loading data..." : JSON.stringify(data) }
               </Typography>
 
             </Card>

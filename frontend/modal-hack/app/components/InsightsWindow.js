@@ -64,9 +64,7 @@ function InsightsWindow() {
 
             <Card className="featureCard">
 
-              {JSON.stringify(data)}
-
-              <ClickableTextBox className="textBox" />
+              {isLoading ? 'Loading data...' : <ClickableTextBox data={data} className="textBox" /> }
 
             </Card>
           </Container>
