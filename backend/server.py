@@ -7,20 +7,11 @@ from insights.transcript import transcribe_video
 import modal
 app = FastAPI()
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-@app.get("/transcribe/")
+@app.get("/insights/")
 def transcribe_url(url: str):
     return json.dumps(transcribe_video(url))
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    
-    return {"item_id": item_id, "q": q}
-
-@app.get("/search")
+@app.get("/marketSearch")
 def search_topic(prompt: str):
     run = modal.Function.lookup("market-research", "run")
     return json.dumps(run.remote(prompt))
