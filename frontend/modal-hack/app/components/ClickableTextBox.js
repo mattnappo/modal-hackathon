@@ -23,7 +23,8 @@ export default function ClickableTextBox({ data }) {
   return (
     <div className="textBox">
     {
-      data.segments.map(segment => <Typography>{segment}</Typography>)
+      // data.segments.map(segment => <Typography>{segment}</Typography>)
+      JSON.stringify(data, null, 4)
     }
     </div>
   );

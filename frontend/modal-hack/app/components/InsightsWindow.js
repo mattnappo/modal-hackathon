@@ -64,8 +64,8 @@ function InsightsWindow() {
 
             <Card className="featureCard">
 
-              {/* {isLoading ? 'Loading data...' : <ClickableTextBox data={data} className="textBox" /> } */}
-              <ClickableTextBox data={{segments: ['seg1', 'seg2', 'sdfsdfkfkjhdsfkjhdsfkjhdsfkjhsdfkjhsdfkjhsdfkjhdsfkjhdsfkjhdsfkjhsdfkjhsdfkjhsdkjfhsdh', 'seg3']}} />
+              {isLoading ? 'Loading data...' : <ClickableTextBox data={data} className="textBox" /> }
+              {/* <ClickableTextBox data={{segments: ['seg1', 'seg2', 'sdfsdfkfkjhdsfkjhdsfkjhdsfkjhsdfkjhsdfkjhsdfkjhdsfkjhdsfkjhdsfkjhsdfkjhsdfkjhsdkjfhsdh', 'seg3']}} /> */}
 
             </Card>
           </Container>

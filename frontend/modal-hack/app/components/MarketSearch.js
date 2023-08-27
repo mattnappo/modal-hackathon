@@ -66,7 +66,8 @@ function MarketSearch() {
             <Card className="featureCard">
 
               <Typography className="textBox">
-                { isLoading ? "Loading data..." : JSON.stringify(data) }
+                { isLoading ? "Loading data..." : JSON.stringify(data, null, 4) }
+
               </Typography>
 
             </Card>
